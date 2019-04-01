@@ -1,0 +1,36 @@
+{
+  "name": "protractor-typescript",
+  "version": "1.0.0",
+  "description": "example of using protractor with typescript",
+  "main": "conf.js",
+  "dependencies": {
+    "jasmine": "^3.3.1",
+    "protractor": "^5.4.2",
+    "typescript": "^3.3.4000",
+    "webdriver-manager": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.3.12",
+    "@types/jasminewd2": "^2.0.6",
+    "@types/node": "^11.11.6",
+    "jasmine-reporters": "^2.3.2",
+    "jasmine-spec-reporter": "^4.2.1",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.14.0"
+  },
+  "scripts": {
+    "webdriver-update": "node node_modules/protractor/bin/webdriver-manager update",
+    "webdriver-start": "node node_modules/protractor/bin/webdriver-manager start",
+    "tsc": "tsc",
+    "clean": "rimraf target/ && rimraf test-results/",
+    "pretest": "npm run clean && npm run tsc",
+    "test": "protractor target/conf.js"
+  },
+  "keywords": [
+    "protractor",
+    "typescript",
+    "jasmine"
+  ],
+  "author": "Almeid Hodzic",
+  "license": "MIT"
+}

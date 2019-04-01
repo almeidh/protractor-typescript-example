@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Update webdrivers
+          command: yarn run webdriver-update
+      - run:
+          name: Start Selenium
+          command: yarn run webdriver-start
+          background: true
+      - run:
+          name: Wait for Selenium
+          command: dockerize -wait tcp://localhost:4444 -timeout 1m
+        
+      # run tests!
+      - run:
+          command: yarn test
+          when: always  
+      - store_test_results:
+          path: ~/repo/test-results
+      - store_artifacts:
+          path: ~/repo/test-results    
