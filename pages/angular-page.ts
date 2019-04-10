@@ -1,36 +1,68 @@
 import {browser, element, by, ProtractorBy} from 'protractor';
+import {Base} from '../base';
 
-export class AngularHomepage {
+export class AngularHomepage extends Base {
   nameInput = element(by.model('yourName'));
   greeting = element(by.binding('yourName'));
   todoInput = element(by.model('todoList.todoText'));
   addToDoButton = element(by.css('input[value="add"]'));
 
-  get() {
-    return browser.get('http://www.angularjs.org');
+  public async get() {
+    try {
+      await browser.get('http://www.angularjs.org');
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  setName(name: string) {
-    return this.nameInput.sendKeys(name);
+  public async setName(name: string) {
+    try {
+      await this.nameInput.sendKeys(name);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  getGreeting(): any {
-    return this.greeting.getText();
+  public async getGreeting() {
+    try {
+      const txt: string = await this.greeting.getText();
+      return txt;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  enterToDo(todo: string) {
-    return this.todoInput.sendKeys(todo);
+  public async enterToDo(todo: string) {
+    try {
+      await this.todoInput.sendKeys(todo);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  addToDo() {
-    return this.addToDoButton.click();
+  public async addToDo() {
+    try {
+      await this.addToDoButton.click();
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  countToDos(): any {
-    return element.all(ProtractorBy.prototype.repeater('todo in todoList.todos')).count();
+  public async countToDos() {
+    try {
+      const num: any = await element.all(ProtractorBy.prototype.repeater('todo in todoList.todos')).count();
+      return num;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
-  getLastToDoText(): any {
-    return element.all(ProtractorBy.prototype.repeater('todo in todoList.todos')).last().getText();
+  public async getLastToDoText() {
+    try {
+      const txt: any = await element.all(ProtractorBy.prototype.repeater('todo in todoList.todos')).last().getText();
+      return txt;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

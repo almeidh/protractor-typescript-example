@@ -4,6 +4,7 @@ const { SpecReporter } = require('jasmine-spec-reporter');
 
 
 export let config: Config = {
+  SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
@@ -20,6 +21,7 @@ export let config: Config = {
   onPrepare() {
     jasmine.getEnv().clearReporters();
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
-    jasmine.getEnv().addReporter(new JUnitXmlReporter({ consolidateAll: true, savePath: 'test-results/jasmine', filePrefix: 'test-results'}));
+    jasmine.getEnv().addReporter(new JUnitXmlReporter({ consolidateAll: true,
+      savePath: 'test-results/jasmine', filePrefix: 'test-results'}));
   }
 };
